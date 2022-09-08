@@ -42,6 +42,11 @@ export class CdkTreeNestedExample {
   dataSource = new ArrayDataSource(TREE_DATA);
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+
+  click_node(): void
+  {
+    alert('alert')
+  }
 }
 
 
