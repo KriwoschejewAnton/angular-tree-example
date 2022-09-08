@@ -1,15 +1,13 @@
 import {ArrayDataSource} from '@angular/cdk/collections';
 import {Component} from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
+import {FoodNode} from './foodnode';
 
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
+
 
 const TREE_DATA: FoodNode[] = [
   {
