@@ -19,11 +19,11 @@ interface Node {
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'cdk-tree-nested-example',
-  templateUrl: 'cdk-tree-nested-example.html',
-  styleUrls: ['cdk-tree-nested-example.css'],
+  selector: 'journals',
+  templateUrl: 'journals.html',
+  styleUrls: ['journals.css'],
 })
-export class CdkTreeNestedExample {
+export class Journals {
   private Journals: Node[] = [];
 
   treeControl = new NestedTreeControl<Node>(this.getChildren);

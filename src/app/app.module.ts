@@ -3,13 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MaterialExampleModule} from '../material.module';
-import {CdkTreeNestedExample} from './cdk-tree-nested-example';
+import {Journals} from './journals';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-  declarations: [CdkTreeNestedExample],
+  declarations: [Journals],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -20,6 +20,6 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [CdkTreeNestedExample],
+  bootstrap: [Journals],
 })
 export class AppModule {}
