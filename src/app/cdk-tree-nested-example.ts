@@ -1,28 +1,19 @@
-import {ArrayDataSource} from '@angular/cdk/collections';
-import {Component} from '@angular/core';
-import {NestedTreeControl} from '@angular/cdk/tree';
-
+import { ArrayDataSource } from '@angular/cdk/collections';
+import { Component } from '@angular/core';
+import { NestedTreeControl } from '@angular/cdk/tree';
 
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
 
- interface Node  {
-   id: string;
-   name: string;
-   children?: Node[];
-  }
-
-
-
-var TREE_DATA: Node[] = 
-[
-  {
-    id: 'journals',
-    name: 'Journals'
-  }
-];
+interface Node {
+  id: string | null;
+  name: string | null;
+  type: string;
+  childrenCount: number;
+  children?: Node[];
+}
 
 /**
  * @title Tree with nested nodes
@@ -33,24 +24,39 @@ var TREE_DATA: Node[] =
   styleUrls: ['cdk-tree-nested-example.css'],
 })
 export class CdkTreeNestedExample {
-  treeControl = new NestedTreeControl<Node>(this.getChildren );
-  dataSource = new ArrayDataSource(TREE_DATA);
+  private Journals: Node[] = [];
 
-  hasChild = (_: number, node: Node) => !!node.children && node.children.length > 0;
+  treeControl = new NestedTreeControl<Node>(this.getChildren);
+  dataSource = new ArrayDataSource(this.Journals);
 
-  click_node(): void
-  {
-    alert('alert')
+  constructor() {
+      this.Journals.push( {
+        id: 'journal1',
+        name: 'Journal1',
+        type: 'root',
+        childrenCount: 0,
+        children: [{ id: null, name: 'fake', type: 'fake', childrenCount: 0 }],
+      });
   }
 
-  getChildren(node: Node)
-  {
-      alert ('get children ' + node.name)
-    return node.children
+  hasChild = (_: number, node: Node) =>
+    !!node.children && node.children.length > 0;
+
+  click_node(): void {
+    console.log('##alert');
+    /*TREE_DATA[0].children = [
+      { id: 'a', name: 'b', type: 'journal', childrenCount: 0 },
+    ];*/
+    //this.treeControl = new NestedTreeControl<Node>(this.getChildren);
+    this.dataSource = new ArrayDataSource(this.Journals);
+    console.log(this.Journals);
   }
 
+  getChildren(node: Node) {
+    console.log('##get children ' + node.name);
+    return node.children;
+  }
 }
-
 
 /**  Copyright 2022 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
