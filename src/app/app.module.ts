@@ -4,12 +4,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MaterialExampleModule} from '../material.module';
 import {Journals} from './journals';
+import {Issues} from './issues';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-  declarations: [Journals],
+  declarations: [Journals,Issues],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

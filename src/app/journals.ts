@@ -1,18 +1,19 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
-
+import { Issue } from './issues';
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
  */
 
-interface Node {
+export interface Journal {
   id: string | null;
-  name: string | null;
-  type: string;
-  childrenCount: number;
-  children?: Node[];
+  title: string | null;
+  doi?: string | null;
+  pissn?: string | null;
+  eissn?: string | null;
+  issues?: Issue[];
 }
 
 /**
@@ -24,37 +25,38 @@ interface Node {
   styleUrls: ['journals.css'],
 })
 export class Journals {
-  private Journals: Node[] = [];
+  private Journals: Journal[] = [];
 
-  treeControl = new NestedTreeControl<Node>(this.getChildren);
+  treeControl = new NestedTreeControl<Journal>(this.getChildren);
   dataSource = new ArrayDataSource(this.Journals);
 
   constructor() {
-      this.Journals.push( {
-        id: 'journal1',
-        name: 'Journal1',
-        type: 'root',
-        childrenCount: 0,
-        children: [{ id: null, name: 'fake', type: 'fake', childrenCount: 0 }],
-      });
-  }
+    this.Journals.push(
+        {
+          id: 'journal_ID1',
+          title: 'Some Journal 1',
+          doi: 'Journal_DOI1',
+          issues: [{ id: null, doi: 'fake', volume: 'fake', issue: 'fake' }]
+        },
 
-  hasChild = (_: number, node: Node) =>
-    !!node.children && node.children.length > 0;
+        {
+          id: 'journal_ID2',
+          title: 'Some Journal 2',
+          doi: 'Journal_DOI2',
+          pissn: 'ISSN2',
+          issues: [{ id: null, doi: 'fake', volume: 'fake', issue: 'fake' }]
+        }
+    );
+  }
 
   click_node(): void {
     console.log('##alert');
-    /*TREE_DATA[0].children = [
-      { id: 'a', name: 'b', type: 'journal', childrenCount: 0 },
-    ];*/
-    //this.treeControl = new NestedTreeControl<Node>(this.getChildren);
-    this.dataSource = new ArrayDataSource(this.Journals);
     console.log(this.Journals);
   }
 
-  getChildren(node: Node) {
-    console.log('##get children ' + node.name);
-    return node.children;
+  getChildren(node: Journal) {
+    console.log('##get children ' + node.title);
+    return null;
   }
 }
 

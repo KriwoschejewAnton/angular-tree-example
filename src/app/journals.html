@@ -1,42 +1,30 @@
 <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
 
-
-
-  <!-- This is the tree node template for leaf nodes -->
-  <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
-    <!-- use a disabled button to provide padding for tree leaf -->
-    <button mat-icon-button disabled>zzzzzz</button>
-    %%%{{node.name}}
-  </cdk-nested-tree-node>
-
-
-
-
   <!-- This is the tree node template for expandable nodes -->
   <cdk-nested-tree-node
-    *cdkTreeNodeDef="let node; when: hasChild"
+    *cdkTreeNodeDef="let node; "
     class="example-tree-node"
   >
     <button
       mat-icon-button
       [attr.aria-label]="'Toggle ' + node.name"
       cdkTreeNodeToggle
-      (click)='click_node()'
+      (click)="click_node()"
     >
       <mat-icon class="mat-icon-rtl-mirror">
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    ####{{node.name}}
-    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-      <a>aaaaaaaaa</a>
-      <ng-container cdkTreeNodeOutlet></ng-container>
+    {{node.title}}
+    <div [class.hidden]="!treeControl.isExpanded(node)">
+      <p>ID: {{node.id}}</p>
+      <p *ngIf="node.doi">DOI: {{node.doi}}</p>
+      <p *ngIf="node.pissn">pISSN: {{node.pissn}}</p>
+      <p *ngIf="node.eissn">eISSN: {{node.eissn}}</p>
+      <!-- <ng-container cdkTreeNodeOutlet></ng-container> -->
+      <issues *ngIf="treeControl.isExpanded(node)" [parent]="node"></issues>
     </div>
   </cdk-nested-tree-node>
-
-
-
-
 </cdk-tree>
 
 <!-- Copyright 2022 Google LLC. All Rights Reserved.
