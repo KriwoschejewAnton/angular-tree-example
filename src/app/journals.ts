@@ -2,6 +2,8 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Issue } from './issues';
+import { SearchService } from './getContent.service';
+
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
@@ -22,6 +24,7 @@ export interface Journal {
 @Component({
   selector: 'journals',
   templateUrl: 'journals.html',
+  providers: [SearchService],
   styleUrls: ['journals.css'],
 })
 export class Journals {

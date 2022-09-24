@@ -8,6 +8,9 @@ import {Issues} from './issues';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
+import { HttpErrorHandler } from '../http-error-handler.service';
+import { MessageService } from '../message.service';
+
 
 @NgModule({
   declarations: [Journals,Issues],
