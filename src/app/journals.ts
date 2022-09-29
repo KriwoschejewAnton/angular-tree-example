@@ -31,38 +31,16 @@ export class Journals {
   private Journals: Journal[] = [];
 
   treeControl = new NestedTreeControl<Journal>(this.getChildren);
-  dataSource = new ArrayDataSource(this.Journals);
+  dataSource: any;
 
   constructor(private searchService: SearchService) {
-    console.log('######');
-    searchService.getJournals().subscribe(
-      //(journals) => {      this.Journals = journals;}
-      (items) => this.setJournals(items)
-    );
-    
-    /*
-    this.Journals.push(
-        {
-          id: 'journal_ID1',
-          title: 'Some Journal 1',
-          doi: 'Journal_DOI1',
-          issues: [{ id: null, doi: 'fake', volume: 'fake', issue: 'fake' }]
-        },
-
-        {
-          id: 'journal_ID2',
-          title: 'Some Journal 2',
-          doi: 'Journal_DOI2',
-          pissn: 'ISSN2',
-          issues: [{ id: null, doi: 'fake', volume: 'fake', issue: 'fake' }]
-        }
-    );
-    */
+    searchService.getJournals().subscribe((items) => this.setJournals(items));
   }
 
   setJournals(items: Journal[]) {
-    alert(' ### ' + items[1].title);
-    this.Journals = items;
+    items.forEach( (z) => this.Journals.push(z) );
+    this.dataSource = new ArrayDataSource(this.Journals);
+    console.log(this.Journals);
   }
 
   click_node(): void {
@@ -71,7 +49,7 @@ export class Journals {
   }
 
   getChildren(node: Journal) {
-    console.log('##get children ' + node.title);
+    //console.log('##get children ' + node.title);
     return null;
   }
 }
