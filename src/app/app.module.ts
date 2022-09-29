@@ -12,6 +12,7 @@ import { HttpErrorHandler } from '../http-error-handler.service';
 import { MessageService } from '../message.service';
 
 
+
 @NgModule({
   declarations: [Journals,Issues],
   imports: [
@@ -23,7 +24,11 @@ import { MessageService } from '../message.service';
     MaterialExampleModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    HttpErrorHandler,
+    MessageService
+
+  ],
   bootstrap: [Journals],
 })
 export class AppModule {}
