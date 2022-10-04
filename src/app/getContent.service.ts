@@ -19,7 +19,9 @@ const httpOptions = {
 
 @Injectable()
 export class SearchService {
-  journalsUrl = 'http://im-markup-language-service-dev.aws.wiley.com:8984/getJournals';  // URL to web api
+  getJournalsUrl = 'http://im-markup-language-service-dev.aws.wiley.com:8984/getJournals';  // URL to web api
+  getJournalUrl = 'http://im-markup-language-service-dev.aws.wiley.com:8984/getJournal';  // URL to web api
+
   private handleError: HandleError;
 
   constructor(
@@ -31,23 +33,23 @@ export class SearchService {
 
   /* GET items whose name contains search term */
   getJournals(): Observable<Journal[]> {
-    return this.http.get<Journal[]>(this.journalsUrl)
+    return this.http.get<Journal[]>(this.getJournalsUrl)
       .pipe(
         catchError(this.handleError<Journal[]>('search', []))
       );
   }
-  /*
-  getJournals(term: string): Observable<Journal[]> {
+  
+  getJournal(term: string): Observable<Journal> {
     term = term.trim();
     const options = term ?
      { params: new HttpParams().set('doi', term) } : {};
 
-    return this.http.get<Journal[]>(this.journalsUrl, options)
+    return this.http.get<Journal>(this.getJournalUrl, options)
       .pipe(
-        catchError(this.handleError<Journal[]>('search', []))
+        catchError(this.handleError<Journal>('search'))
       );
   }  
-  */
+  
 
 }
 

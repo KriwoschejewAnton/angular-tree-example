@@ -10,11 +10,12 @@ import { SearchService } from './getContent.service';
  */
 
 export interface Journal {
-  id: string | null;
-  title: string | null;
+  id: string;
+  title: string;
   doi?: string | null;
   pissn?: string | null;
   eissn?: string | null;
+  issuesCount?: number;
   issues?: Issue[];
 }
 
@@ -38,12 +39,26 @@ export class Journals {
   }
 
   setJournals(items: Journal[]) {
-    items.forEach( (z) => this.Journals.push(z) );
+    items.forEach((z) => this.Journals.push(z));
     this.dataSource = new ArrayDataSource(this.Journals);
     console.log(this.Journals);
   }
 
+  setJournal(node: Journal, item: Journal) {
+    let i = this.Journals.findIndex((i) => i.id === node.id);
+    this.Journals[i] = item;
+    this.dataSource = new ArrayDataSource(this.Journals);
+    console.log(i);
+    console.log(this.Journals[i]);
+  }
+
   click_node(node: Journal): void {
+    if(! node.issuesCount)
+    {
+      this.searchService
+      .getJournal(node.id)
+      .subscribe((item) => this.setJournal(node, item));
+    }
     console.log('##alert');
     console.log(node);
   }
