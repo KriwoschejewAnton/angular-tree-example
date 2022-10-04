@@ -9,7 +9,7 @@
       mat-icon-button
       [attr.aria-label]="'Toggle ' + node.name"
       cdkTreeNodeToggle
-      (click)="click_node()"
+      (click)="click_node(node)"
     >
       <mat-icon class="mat-icon-rtl-mirror">
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}

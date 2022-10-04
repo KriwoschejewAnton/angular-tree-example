@@ -43,13 +43,13 @@ export class Journals {
     console.log(this.Journals);
   }
 
-  click_node(): void {
+  click_node(node: Journal): void {
     console.log('##alert');
-    console.log(this.Journals);
+    console.log(node);
   }
 
   getChildren(node: Journal) {
-    //console.log('##get children ' + node.title);
+    console.log('##get children ' + node.title);
     return null;
   }
 }
