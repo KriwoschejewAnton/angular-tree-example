@@ -48,16 +48,20 @@ export class Journals {
     let i = this.Journals.findIndex((i) => i.id === node.id);
     this.Journals[i] = item;
     this.dataSource = new ArrayDataSource(this.Journals);
+    setTimeout(() => {
+      this.treeControl.expand(node);
+      console.log('###############');
+      console.log(node);
+    }, 2000);
     console.log(i);
     console.log(this.Journals[i]);
   }
 
   click_node(node: Journal): void {
-    if(! node.issuesCount)
-    {
+    if (!node.issuesCount) {
       this.searchService
-      .getJournal(node.id)
-      .subscribe((item) => this.setJournal(node, item));
+        .getJournal(node.id)
+        .subscribe((item) => this.setJournal(node, item));
     }
     console.log('##alert');
     console.log(node);
